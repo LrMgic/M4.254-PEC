@@ -14,6 +14,7 @@ import { WineDetailComponent } from './wines/wine-detail/wine-detail.component';
 import { WineItemComponent } from './wines/wine-item/wine-item.component';
 import { WineListComponent } from './wines/wine-list/wine-list.component';
 import { WineNewComponent } from './wines/wine-new/wine-new.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { WineNewComponent } from './wines/wine-new/wine-new.component';
     FormsModule, // NgModel
     ReactiveFormsModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [
     WineService,

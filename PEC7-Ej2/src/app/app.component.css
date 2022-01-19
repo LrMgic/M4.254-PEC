@@ -1,13 +1,7 @@
-* {
-    margin: 0; 
-    padding: 0;
-    box-sizing: border-box;
+.links, .links a {
+  padding: 10px;
 }
 
-.content {
-    margin: 70px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.links a.active {
+  background-color: grey;
 }
