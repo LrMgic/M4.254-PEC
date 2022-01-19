@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class WineLoadResolverGuard implements CanLoad {
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+@Injectable()
+export class WineLoadResolverGuard implements CanActivate {
+  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+
+  canActivate(): Observable<boolean> {
+    return this.afAuth.authState.pipe(
+      take(1),
+      map((user) => !!user),
+      tap((loggedIn) => {
+        if (!loggedIn) {
+          console.log('Access Denied');
+          this.router.navigate(['/login']);
+        }
+      })
+    );
   }
 }
